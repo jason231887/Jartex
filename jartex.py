@@ -3,6 +3,7 @@ import requests
 from time import gmtime, strftime
 from csv import writer
 
+#URL of the store page
 url = 'https://store.jartexnetwork.com/'
 
 name = []
