@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<style>
+    table {
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 2em;
+        width: 100%;
+        border-spacing: 80px;
+    }
+    th {
+        text-align: left;
+        background-color: grey;
+        color: white;
+    }
+    tr {
+        text-align: left;
+        border-bottom: 1px solid;
+        color: white;
+    }
+    h1 {
+        text-align: center;
+        color: white;
+        font-size: 2.5em;
+    }
+    body {
+        background-color: black;
+    }
+    .searchBar {
+        width: 250px;
+        height: 25px;
+        border-radius: 10px;
+    }
+
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Jartex Store</title>
+</head>
+
+<body>
+    <h1>Jartex Store Records</h1>
+    <div style="text-align: center;">
+        <input type="text" id="myInput" onkeyup="tableSearch()" placeholder="Search" class="searchBar">
+    </div>
+
+    <table class="table" id="myTable" data-filter-control="true" data-show-search-clear-button="true">
+        <tr>
+            {% for header in headings%}
+            <th>{{ header }}</th>
+            {% endfor %}
+        </tr>
+        {% for row in data %}
+        <tr>
+            {% for cell in row %}
+            <td> {{ cell }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+    <script type="application/javascript">
+        function tableSearch(specifier) {
+            let input, filter, table, tr, names, items, txtValue, dates;
+
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            console.log(filter)
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+
+            for (let i = 0; i < tr.length; i++) {
+                names = tr[i].getElementsByTagName("td")[0]
+                items = tr[i].getElementsByTagName("td")[1]
+                dates = tr[i].getElementsByTagName("td")[2]
+                if (names || items) {
+                    name_value = names.textContent || names.innerText;
+                    item_value = items.textContent || items.innerText;
+                    date_value = dates.textContent || dates.innerText;
+                    if ((name_value.toUpperCase().indexOf(filter) > -1) ||
+                        (item_value.toUpperCase().indexOf(filter) > -1) ||
+                        (date_value.toUpperCase().indexOf(filter) > -1)) {
+                        tr[i].style.display = "";
+                    }
+                    else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

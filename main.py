@@ -1,10 +1,11 @@
 import time
 import jartex
 
-count = 0
+count = 1
 
 while True:
     print("Run Count: " + str(count))
     jartex.main()
     count += 1
-    time.sleep(600)
+    #Run every 300 seconds/5 minutes
+    time.sleep(300)
